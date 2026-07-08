@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A deep learning framework for peptide toxicity prediction using a Mamba-based architecture with multi-scale feature fusion. The model processes peptide sequences through three parallel selective state-space model (Mamba) branches with different kernel sizes (3, 5, 7), followed by multi-representation fusion and classification.
+<img width="1073" height="650" alt="image" src="https://github.com/user-attachments/assets/da3dc121-6f23-4fd1-a17a-a48eaa53e85f" />
+
 
 ## Overview
 
