@@ -1,0 +1,78 @@
+# =============================================================================
+# Configuration file for Peptide Toxicity Prediction (ToxMamba)
+# =============================================================================
+
+title = 'ToxMamba'
+
+# --- GPU settings ---
+cuda_num = '0'
+site = 'local'
+
+# --- Dataset settings ---
+species = 'PTP_SMGCA_data'
+
+# --- File organization ---
+file_sytle = 'train_test_2file'
+
+# --- Training mode ---
+train_test_mode = ['train', 'test']
+
+# --- Independent test set ---
+independent = true
+indep_name = '_independent_test'
+
+# --- Model settings ---
+num_class = 2
+is_graph_model = false
+
+# --- Loss function ---
+loss_func_name = 'FocalLoss'
+
+# --- Embedding settings ---
+adapt_vocab_size = 28
+adapt_d_model = 256
+adapt_kernel_size = 8
+
+# --- Mamba model hyperparameters ---
+d_model = 1280
+n_layer = 6
+vocab_size = 32
+d_state = 16
+expand = 4
+dt_rank = 'auto'
+d_conv = 4
+pad_vocab_size_multiple = 4
+conv_bias = true
+bias = true
+d_inner = 256
+
+# --- Training hyperparameters ---
+epochs = 80
+batch_size = 256
+batch_size_test = 256
+Learning_rate = 1e-4
+Patience = 20
+K_fold = 5
+
+# --- Evaluation ---
+threshold = 0.5
+best_threshold = false
+early_stop_matric_bi = 'AUC'
+
+# --- Advanced features ---
+contras = false
+clip_out = false
+clip_iner = false
+Distilling_Knowledge = false
+transfer = false
+evidential_deep_learning = false
+Check_test_early = false
+selectby_test = false
+
+# --- Other ---
+num_workers = 12
+batch_size_clip = 6
+epochs_clip = 2
+temperature = 1
+drop_last = false
+output_dir = './results'
