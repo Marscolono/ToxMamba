@@ -124,7 +124,7 @@ All hyperparameters are controlled via `configs/config.toml`:
 
 ```toml
 # Dataset
-species = 'PTP_SMGCA_data'
+species = 'Toxi_data'
 
 # Model Architecture
 d_model = 1280
