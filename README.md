@@ -17,7 +17,6 @@ ToxMamba implements a state-of-the-art peptide toxicity prediction model based o
 - **Mamba-based Architecture**: Multi-scale selective state space models for sequence modeling
 - **Pseudo-Siamese Convolution**: Position-specific convolutions with three kernel sizes (3, 5, 7)
 - **Multi-Representation Fusion**: Adaptive fusion of features from different Mamba branches
-- **Multiple Embedding Modes**: Supports one-hot encoding, adaptive tokenization, and pretrained ESM-2 embeddings
 - **5-Fold Cross-Validation**: Rigorous evaluation with independent test set
 - **Comprehensive Metrics**: AUC, AUPR, MCC, F1, Sensitivity, Specificity, Accuracy, and more
 - **Reproducible**: Fixed random seeds and deterministic settings
@@ -115,11 +114,6 @@ train_3	FKGRMITHKEIGAKVLAEFAEKTQDI	0
 
 ### Data Organization Modes
 
-Controlled by `file_sytle` in `config.toml`:
-- **`train_test_2file`** (default): `train.csv` + `test.csv` — internal 5-fold CV
-- **`train_valid_test_3file`**: Pre-split `train_0.txt`, `valid_0.txt`, ..., `test.txt`
-- **`train_valid_1file_only5fold`**: Single `train.csv`, 5-fold CV only
-
 ## Configuration
 
 All hyperparameters are controlled via `configs/config.toml`:
@@ -176,26 +170,7 @@ python src/main.py \
 
 | Type | Description | Requires |
 |------|-------------|----------|
-| `adapt` | Integer token encoding | Nothing extra |
-| `onehot` | One-hot amino acid encoding | Nothing extra |
-| `pretrain` / `pretrain_ISM` | ESM-2 embeddings | `.pt` files in `data/{dataset}/ESM2_embeddings/` |
-
-### Generating ESM-2 Embeddings
-
-```python
-import torch
-from transformers import AutoTokenizer, AutoModel
-
-model = AutoModel.from_pretrained("facebook/esm2_t33_650M_UR50D")
-tokenizer = AutoTokenizer.from_pretrained("facebook/esm2_t33_650M_UR50D")
-
-for name, seq in sequences:
-    inputs = tokenizer(seq, return_tensors="pt")
-    with torch.no_grad():
-        outputs = model(**inputs)
-    embedding = outputs.last_hidden_state  # (1, seq_len, 1280)
-    torch.save(embedding, f"data/{dataset}/ESM2_embeddings/{name}.pt")
-```
+| `pretrain` / `pretrain_ISM` | ISM embeddings | `.pt` files in `data/{dataset}/ISM_embeddings/` |
 
 ## Model Architecture
 
